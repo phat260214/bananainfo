@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banana Cat DZ</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Hiệu ứng mưa */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* Tiêu đề chính */
+h1 {
+  font-size: 60px;
+  text-align: center;
+  margin-top: 40px;
+  color: cyan;
+  text-shadow: 0 0 20px cyan;
+  z-index: 1;
+  position: relative;
+}
+h2 {
+  text-align: center;
+  color: #ff4d4d;
+  z-index: 1;
+  position: relative;
+}
+
+/* Container */
+.container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+/* Nút chính */
+.card {
+  width: 80%;
+  max-width: 400px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid cyan;
+  border-radius: 15px;
+  margin: 15px 0;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.card:hover {
+  background: rgba(0, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+.card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: white;
+}
+.card p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #aaa;
+}
+</style>
+</head>
+<body>
+
+<canvas id="rain"></canvas>
+
+<h1>Banana Cat DZ</h1>
+<h2>Website Official</h2>
+
+<div class="container">
+  <!-- Nút Discord -->
+  <div class="card" onclick="window.open('https://discord.com', '_blank')"> <!-- // đổi link ở đây -->
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
+    <div>
+      <h3>Discord Community</h3>
+      <p>Nhấn để tham gia</p>
+    </div>
+  </div>
+
+  <!-- Nút Roblox -->
+  <div class="card" onclick="window.open('https://www.roblox.com', '_blank')"> <!-- // đổi link ở đây -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Roblox_Logo_2022.svg" alt="Roblox">
+    <div>
+      <h3>Roblox Game</h3>
+      <p>Nhấn để chơi</p>
+    </div>
+  </div>
+
+  <!-- Nút GunsLOL -->
+  <div class="card" onclick="window.open('https://guns.lol', '_blank')"> <!-- // đổi link ở đây -->
+    <img src="https://i.ibb.co/4PN3KvZ/gunslol.png" alt="GunsLOL">
+    <div>
+      <h3>GunsLOL Profile</h3>
+      <p>Nhấn để xem</p>
+    </div>
+  </div>
+
+  <!-- Nút GitHub -->
+  <div class="card" onclick="window.open('https://github.com', '_blank')"> <!-- // đổi link ở đây -->
+    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+    <div>
+      <h3>GitHub Project</h3>
+      <p>Nhấn để truy cập</p>
+    </div>
+  </div>
+</div>
+
+<!-- Nhạc nền YouTube -->
+<iframe width="0" height="0" src="https://www.youtube.com/embed/3tmd-ClpJxA?autoplay=1&loop=1" frameborder="0"></iframe> 
+<!-- // đổi link video ở đây -->
+
+<script>
+// ===== Hiệu ứng mưa =====
+const canvas = document.getElementById('rain');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let drops = [];
+for (let i = 0; i < 200; i++) {
+  drops.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    length: Math.random() * 20 + 10,
+    speed: Math.random() * 4 + 4
+  });
+}
+function drawRain() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = 'rgba(173, 216, 230, 0.6)';
+  ctx.lineWidth = 2;
+  drops.forEach(d => {
+    ctx.beginPath();
+    ctx.moveTo(d.x, d.y);
+    ctx.lineTo(d.x, d.y + d.length);
+    ctx.stroke();
+    d.y += d.speed;
+    if (d.y > canvas.height) {
+      d.y = 0;
+      d.x = Math.random() * canvas.width;
+    }
+  });
+  requestAnimationFrame(drawRain);
+}
+drawRain();
+</script>
+
+</body>
+</html>
